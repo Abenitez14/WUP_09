@@ -62,8 +62,11 @@ summary.lm(perchmodel)
 pmodel <- lm(Weight ~ Height + Width + Length1 + Length2 + Length3, data = perch)
 summary.lm(pmodel)
 ```
+We used two models to figure out our Residual standard error and the adjusted r squared of both models for the first residual it is 85.17 then the second one is 87.11 for the adjusted r squared the first one is 0.94 then the second on it is 0.9372.
 
-## Pike
+
+
+## Bream
 
 ### Best Models
 
