@@ -67,10 +67,48 @@ We used two models to figure out our Residual standard error and the adjusted r 
 
 
 ## Bream
+```{r}
+Fish <- read.csv("Fish.csv")
+Bream <- filter(Fish, Species == "Bream")
+```
 
+```{r}
+Bream <- select(Bream,-Species)
+```
 ### Best Models
 
 ### Best Two regressor model
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Bream,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+```
+
+The best regression model is Length1 Height and Weight because it is at the top.
+
+```{r}
+Breammodel <- lm(Weight ~ Height + Width, data = Bream)
+summary.lm(Breammodel)
+```
+
+```{r}
+Bmodel <- lm(Weight ~ Height + Width + Length1 + Length2 + Length3, data = Bream)
+summary.lm(Bmodel)
+```
+
+The first Residual standard error 53.98 the second one 53.96 the first adjusted r square is 0.9334 the adjusted r square is 0.9335
+
+
 
 ## Roach
 
