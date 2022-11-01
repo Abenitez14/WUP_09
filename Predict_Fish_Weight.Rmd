@@ -23,10 +23,34 @@ require(tidyverse)
 
 ## Perch
 
+```{r}
+Fish <- read.csv("Fish.csv")
+perch <- filter(Fish, Species == "Perch")
+```
+
+```{r}
+perch <- select(perch,-Species)
+```
+
 ### Best Models
 
-### Best Two regressor model
 
+### Best Two regressor model
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = perch,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+```
 
 ## Pike
 
