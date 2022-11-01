@@ -49,7 +49,18 @@ regsubsets.out <-
 summary.out <- summary(regsubsets.out)
 as.data.frame(summary.out$outmat)
 library(car)
-subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+subsets(regsubsets.out,statistic="adjr2",legend="topright",main="Adjusted R^2")
+```
+The best two regressor model is height and weight because those are the highest adjusted r squared.
+
+```{r}
+perchmodel <- lm(Weight ~ Height + Width, data = perch)
+summary.lm(perchmodel)
+```
+
+```{r}
+pmodel <- lm(Weight ~ Height + Width + Length1 + Length2 + Length3, data = perch)
+summary.lm(pmodel)
 ```
 
 ## Pike
