@@ -111,9 +111,47 @@ The first Residual standard error 53.98 the second one 53.96 the first adjusted 
 
 
 ## Roach
+```{r}
+Fish <- read.csv("Fish.csv")
+Roach <- filter(Fish, Species == "Roach")
+```
 
+```{r}
+Roach <- select(Roach,-Species)
+```
 ### Best Models
 
 ### Best Two regressor model
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Roach,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="topright",main="Adjusted R^2")
+```
+
+```{r}
+Roachmodel <- lm(Weight ~ Height + Width, data = Roach)
+summary.lm(Roachmodel)
+```
+
+```{r}
+Rmodel <- lm(Weight ~ Height + Width + Length1 + Length2 + Length3, data = Roach)
+summary.lm(Rmodel)
+```
+
+The first Residual standard error is 35.63 the second is 37.58 the first adjusted r square is 0.8391 the second one is 0.821.
+
 
 ## Final Summary Statements
+
+
+In all the test we did it showed us that for the first model the first summary was the best for the second model the second summary was the best and for the third model the first summary was the best all the summarys were focused on finding which fish weighed the most and how would we be able to mesusre it by. 
