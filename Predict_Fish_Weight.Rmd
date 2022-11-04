@@ -150,6 +150,21 @@ summary.lm(Rmodel)
 
 The first Residual standard error is 35.63 the second is 37.58 the first adjusted r square is 0.8391 the second one is 0.821.
 
+```{r}
+favstats(Weight~Species,data=Fish)
+```
+
+The Bream has a mean weight of 617.8 Which is 1.6 times bigger than the perch which has a mean weight of 382.2. The roach is smaller than both fishes and has a weight of 152. So that leaves that Bream is the heaviest fish that we have for the data.
+
+The adjusted r squared for perch is 0.94 the standard deviation is higher than all the other fishes at 347.61 . The bream's adjusted r squared is 0.93 the standard deviation is lower than perch but still bigger than Roach.
+Bream has a tighter deviation that Perch and Roach, Perch's residual standard error is 85.17  which indicates that the data is not as tight as bream, bream has a residual standard error is 53.1.
+
+```{r}
+basicCN <- ggplot(perch,aes(y=Weight,x=Length1))
+```
+```{r}
+basicCN + geom_point() + geom_lm()
+```
 
 ## Final Summary Statements
 
